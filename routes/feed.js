@@ -12,4 +12,7 @@ router.post("/createPost",
   feedController.createPost
 );
 
+router.get('/post/:postId', feedController.getPost);
+
+
 module.exports = router;
