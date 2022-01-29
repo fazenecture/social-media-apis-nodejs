@@ -1,3 +1,5 @@
+const path = require("path");
+
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
@@ -15,13 +17,21 @@ app.use((req, res, next) => {
 });
 
 app.use("/feed", feedRoutes);
+app.use("/images", express.static(path.join(__dirname, "images")));
+
+app.use((error, req, res, next) => {
+  console.log(error);
+  const status = error.statusCode;
+  const message = error.message;
+  res.status(status).json({ message: message });
+});
 
 mongoose
   .connect(
     "mongodb+srv://new-user-01:Jaimatadi@cluster0.3optd.mongodb.net/messages?retryWrites=true&w=majority"
   )
   .then((result) => {
-      console.log("Connected");
+    console.log("Connected");
     app.listen(8080);
   })
   .catch((err) => {
