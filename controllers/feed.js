@@ -23,12 +23,18 @@ exports.createPost = (req, res, next) => {
         error.statusCode = 422;
         throw error;
     }
+    if(!req.file){
+        const error = new Error("No Image Provided");
+        error.statusCode = 422;
+        throw error; 
+    }
   const title = req.body.title;
+  const imageUrl = req.file.path;
   const content = req.body.content;
   const post = new Post({
     title: title,
     content: content,
-    imageUrl: 'images/dashimage.png',
+    imageUrl: imageUrl,
     creator : {
       name: "Rnapdm"
   },
