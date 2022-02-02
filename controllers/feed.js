@@ -53,7 +53,7 @@ exports.createPost = (req, res, next) => {
       next(err);
   });
 
-
+ 
 };
 
 exports.getPost = (req, res, next) => {
@@ -74,3 +74,7 @@ exports.getPost = (req, res, next) => {
         next(err);
     })
 };
+
+exports.updatePost = (req, res, next) = {
+    
+}
